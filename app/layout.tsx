@@ -4,6 +4,8 @@ import Navbar from './components/Navbar/index';
 import Footer from './components/Footer/Footer';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { AuthProvider } from './contexts/authContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
   title: 'eLearning',
@@ -23,6 +25,7 @@ export default function RootLayout({
           <AntdRegistry>{children}</AntdRegistry>
         </AuthProvider>
         <Footer />
+        <ToastContainer />
       </body>
     </html>
   )

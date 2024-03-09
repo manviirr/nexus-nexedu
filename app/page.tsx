@@ -4,14 +4,18 @@ import Courses from './components/Courses/index';
 import Mentor from './components/Mentor/index';
 import Testimonials from './components/Testimonials/index';
 import Newsletter from './components/Newsletter/Newsletter';
+import { getCourses } from './services/course-service';
 
 
-export default function Home() {
+export default async function Home() {
+  const courseResponse = await getCourses();
+  const courses = courseResponse.data.documents;
+
   return (
     <main>
       <Banner />
       {/* <Companies /> */}
-      <Courses />
+      <Courses courses={courses} />
       {/* <Mentor /> */}
       {/* <Testimonials /> */}
       <Newsletter />

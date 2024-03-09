@@ -1,3 +1,5 @@
+const { colors } = require('@mui/material');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -33,7 +35,10 @@ module.exports = {
       'gunmetalgray': '#363636',
       'gray-blue': 'rgba(105, 120, 131, 0.16)',
       'dark-red': 'rgba(44, 9, 11, 0.8)',
-
+      blue: colors.blue,
+      green: colors.green,
+      gray: colors.grey,
+      red: colors.red
     },
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],

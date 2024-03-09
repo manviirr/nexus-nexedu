@@ -1,24 +1,28 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useCallback, useEffect, useState } from 'react'
+import { Fragment, MouseEvent, useCallback, useEffect, useState } from 'react'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import firebaseApp from '../../../firebase/config';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthContext } from '@/app/contexts/authContext';
 import { Avatar } from 'antd';
 import { Menu, MenuItem } from '@mui/material';
+import Image from 'next/image';
 
 const Signin = () => {
     let [isOpen, setIsOpen] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { signIn, auth } = useAuthContext();
+    const { signIn, auth, logout } = useAuthContext();
     const [user, setUser] = useState();
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
+    const handleClick = (event?: MouseEvent<HTMLElement, MouseEvent> | undefined) => {
+        if (event) {
+            setAnchorEl(event.currentTarget);
+        }
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -40,7 +44,8 @@ const Signin = () => {
 
     const login = useCallback(async () => {
         try {
-            signIn(email, password);
+            await signIn(email, password);
+            setIsOpen(false);
         } catch (err) {
             console.log(err);
         }
@@ -63,6 +68,8 @@ const Signin = () => {
                                 }}
                                 size="large"
                                 gap={100}
+                                onClick={handleClick}
+                                className='cursor-pointer'
                             >
                                 {user.email?.charAt(0)}
                             </Avatar>
@@ -82,9 +89,7 @@ const Signin = () => {
                                     horizontal: 'left',
                                 }}
                             >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                <MenuItem onClick={logout}>Logout</MenuItem>
                             </Menu>
                         </>
                     )}
@@ -121,10 +126,13 @@ const Signin = () => {
                                     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                                         <div className="w-full max-w-md space-y-8">
                                             <div>
-                                                <img
-                                                    className="mx-auto h-12 w-auto"
-                                                    src="/assets/logo/logo.svg"
+                                                <Image
+                                                    className="mx-auto h-24 w-auto"
+                                                    src="/assets/logo/logo.png"
                                                     alt="Your Company"
+                                                    height={0}
+                                                    width={0}
+                                                    sizes='100vw'
                                                 />
                                                 <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                                                     Sign in to your account

@@ -1,7 +1,8 @@
 import React, { useContext, createContext } from "react";
 import { useCallback } from "react";
 import firebaseApp from '../../firebase/config';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 export const useAuthContext = () => useContext(AuthContext);
@@ -15,14 +16,34 @@ export const AuthProvider = ({
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
         }catch(err){
             console.log(err);
+            toast(err.message, {
+                type: "error"
+            })
         }
+    }, [auth]);
+
+    const signUp = useCallback(async (email, password) => {
+        try{
+            await createUserWithEmailAndPassword(auth, email, password);
+        }catch(err){
+            console.log(err);
+            toast(err.message, {
+                type: "error"
+            })
+        }
+    }, [auth])
+
+    const logout = useCallback(() => {
+        signOut(auth);
     }, [auth]);
 
     return (
         <AuthContext.Provider
             value={{
                 signIn,
-                auth
+                auth,
+                logout,
+                signUp
             }}
         >
             {children}

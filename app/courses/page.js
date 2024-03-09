@@ -1,12 +1,20 @@
-import { getCourses } from "../../services/course-service";
+
+import CourseCard from "../components/CourseCard/CourseCard";
+import { getCourses } from "../services/course-service";
 
 export default async function CoursesPage() {
     const coursesResponse = await getCourses();
-    console.log("coursesResponse", coursesResponse.data);
+    const courses = coursesResponse.data.documents;
 
     return (
-        <div>
-            <h1>Courses Page</h1>
+        <div className="px-24">
+            <h1 className="text-xl ml-6">Courses</h1>
+
+            <div className="grid grid-cols-3">
+                {courses.map(course => (
+                    <CourseCard key={course._id} course={course} />
+                ))}
+            </div>
         </div>
     )
 }

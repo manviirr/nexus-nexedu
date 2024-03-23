@@ -11,6 +11,7 @@ export const AuthProvider = ({
     children
 }) => {
     const auth = getAuth(firebaseApp);
+
     const signIn = useCallback(async (email, password) => {
         try{
             const userCredential = await signInWithEmailAndPassword(auth, email, password);

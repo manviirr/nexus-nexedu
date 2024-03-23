@@ -1,21 +1,25 @@
 import { Disclosure } from '@headlessui/react';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import Drawer from "./Drawer";
 import Drawerdata from "./Drawerdata";
 import Signdialog from "./Signdialog";
 import Registerdialog from "./Registerdialog";
+import { Auth, User } from 'firebase/auth';
+import { useAuthContext } from '@/app/contexts/authContext';
 
 interface NavigationItem {
     name: string;
     href: string;
     current: boolean;
+    authRequired: boolean;
 }
 
 const navigation: NavigationItem[] = [
-    { name: 'Home', href: '/', current: true },
-    { name: 'Courses', href: '/courses', current: false },
+    { name: 'Home', href: '/', current: true, authRequired: false },
+    { name: 'Courses', href: '/courses', current: false, authRequired: false },
+    { name: "My Courses", href: '/courses/my-courses', current: false, authRequired: true }
     // { name: 'Mentor', href: '#mentor', current: false },
     // { name: 'Group', href: '/', current: false },
     // { name: 'Testimonial', href: '#testimonial', current: false },
@@ -41,8 +45,15 @@ const CustomLink = ({ href, onClick, children }: { href: string; onClick: () => 
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = React.useState(false);
-
+    const [user, setUser] = useState<User>();
     const [currentLink, setCurrentLink] = useState('/');
+    const { auth }: { auth: Auth } = useAuthContext();
+
+    useEffect(() => {
+        auth.onAuthStateChanged(user => {
+            setUser(user || undefined);
+        })
+    }, [auth]);
 
     const handleLinkClick = (href: string) => {
         setCurrentLink(href);
@@ -74,7 +85,7 @@ const Navbar = () => {
 
                             <div className="hidden lg:block m-auto">
                                 <div className="flex space-x-4">
-                                    {navigation.map((item) => (
+                                    {navigation.filter(item => item.authRequired ? !!user : true).map((item) => (
                                         <CustomLink
                                             key={item.name}
                                             href={item.href}

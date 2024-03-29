@@ -35,19 +35,19 @@ const socialLinks: socialLinks[] = [
 const products: ProductType[] = [
     {
         id: 1,
-        section: "Company",
-        link: ['About', 'Careers', 'Mobile', 'Blog', 'How we work?'],
+        section: "Discover",
+        link: ['Courses', 'Subjects', 'Tutors', 'Learning Resources', 'Events']
     },
     {
         id: 2,
-        section: "Contact",
-        link: ['Help/FAQ', 'Press', 'Affiliates', 'Hotel owners', 'Partners']
+        section: "About Us",
+        link: ['About', 'Team', 'Mission', 'Testimonials', 'Contact Us']
     }
     ,
     {
         id: 3,
-        section: "More",
-        link: ['Airline fees', 'Airlines', 'Low fare tips', 'Badges &', 'Certificates']
+        section: "Get Involved",
+        link: ['Become a Tutor', 'Partner with Us', 'Join Community', 'Events', 'Blog']
     }
 ]
 
@@ -61,9 +61,9 @@ const footer = () => {
 
                 <div className='sm:col-span-6 lg:col-span-5'>
                     <div className="flex flex-shrink-0 items-center border-right">
-                        <Image src="/assets/logo/logo.svg" alt="logo" width={214} height={66} />
+                        <Image src="/assets/logo/logo.png" alt="logo" width={214} height={66} />
                     </div>
-                    <h3 className='text-xs font-medium text-gunmetalgray lh-160 mt-5 mb-4 lg:mb-16'> Open an account in minutes, get full financial <br /> control for much longer.</h3>
+                    <h3 className='text-xs font-medium text-gunmetalgray lh-160 mt-5 mb-4 lg:mb-16'> Unlock Your Potential, One Click at a Time!</h3>
                     <div className='flex gap-4'>
 
                         {socialLinks.map((items, i) => (
@@ -98,7 +98,7 @@ const footer = () => {
             {/* All Rights Reserved */}
 
             <div className='py-10 md:flex items-center justify-between border-t border-t-gray-blue'>
-                <h4 className='text-dark-red opacity-75 text-sm text-center md:text-start font-normal'>@2023.E-learnings.All rights reserved</h4>
+                <h4 className='text-dark-red opacity-75 text-sm text-center md:text-start font-normal'>@2023.NexEdu.All rights reserved</h4>
                 <div className="flex gap-5 mt-5 md:mt-0 justify-center md:justify-start">
                     <h4 className='text-dark-red opacity-75 text-sm font-normal'><Link href="/" target="_blank">Privacy policy</Link></h4>
                     <div className="h-5 bg-dark-red opacity-25 w-0.5"></div>

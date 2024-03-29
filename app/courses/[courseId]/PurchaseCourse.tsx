@@ -1,4 +1,5 @@
 "use client"
+import { useAuthContext } from "@/app/contexts/authContext";
 import { createCheckoutSession } from "@/app/services/payment-service";
 import { toast } from "react-toastify";
 
@@ -7,9 +8,13 @@ export default function PurchaseCourse({
 }: {
     courseId: string
 }) {
+    const { auth } = useAuthContext();
     const initiatePurchase = async () => {
         try {
-            const response = await createCheckoutSession(courseId);
+            const { currentUser } = auth;
+            console.log("currentUser", currentUser);
+            const { uid } = currentUser;
+            const response = await createCheckoutSession(courseId, uid);
             console.log("response", response.data);
             window.location.href = response.data.url;
         } catch (err) {

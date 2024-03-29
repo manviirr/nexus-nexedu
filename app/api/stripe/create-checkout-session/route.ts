@@ -4,13 +4,13 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
-    const { courseId } = body;
+    const { courseId, uid } = body;
     console.log("request", body);
 
     const courseResponse = await getCourse(courseId);
     const course = courseResponse.data.document;
     
-    const session = await createStripeCheckoutSession(course);
+    const session = await createStripeCheckoutSession(course, uid);
 
     console.log("session", session);
 

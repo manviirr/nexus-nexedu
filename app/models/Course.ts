@@ -8,13 +8,7 @@ export interface Course {
     rating: number,
     price: number,
     studentCount: number,
-    classes: [{
-        title: string,
-        duration: {
-            hours: number,
-            minutes: number
-        }
-    }],
+    classes: CourseClass[],
     description: string,
     image: string,
     _id: string,
@@ -24,4 +18,13 @@ export interface Course {
         message: string
     }],
     body_html: string
+}
+
+export interface CourseClass {
+    title: string,
+    duration: {
+        hours: number,
+        minutes: number
+    },
+    videoUrl: string
 }

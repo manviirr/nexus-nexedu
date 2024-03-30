@@ -7,6 +7,7 @@ import { useAuthContext } from '@/app/contexts/authContext';
 import { Avatar } from 'antd';
 import { Menu, MenuItem } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Signin = () => {
     let [isOpen, setIsOpen] = useState(false);
@@ -90,6 +91,9 @@ const Signin = () => {
                                 }}
                             >
                                 <MenuItem onClick={logout}>Logout</MenuItem>
+                                <MenuItem>
+                                    <Link href={"/profile"}>Profile</Link>
+                                </MenuItem>
                             </Menu>
                         </>
                     )}

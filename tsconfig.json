@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/contexts/authContext.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/contexts/authContext.js", "app/courses/my-course/[courseId]/quiz/QuizComponent.jsx"],
   "exclude": ["node_modules"]
 }

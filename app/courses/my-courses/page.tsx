@@ -7,9 +7,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react';
+import { RevolvingDot } from 'react-loader-spinner';
 
 function CoursesComponent() {
-    const [courses, setCourses] = useState<Course[]>([]);
+    const [courses, setCourses] = useState<Course[]>();
     const { auth }: { auth: Auth } = useAuthContext();
     const router = useRouter();
 
@@ -28,6 +29,20 @@ function CoursesComponent() {
     useEffect(() => {
         fetchCourses();
     }, [fetchCourses]);
+
+    if (!courses) {
+        return (
+            <RevolvingDot
+                visible={true}
+                height="80"
+                width="80"
+                color="#4fa94d"
+                ariaLabel="revolving-dot-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+            />
+        )
+    }
 
     if (courses.length === 0) {
         return (

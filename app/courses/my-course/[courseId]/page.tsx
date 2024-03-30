@@ -15,7 +15,7 @@ const CourseVideos = async ({
 
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row items-start">
-      <CourseVideoComponent courseClasses={courseClasses} />
+      <CourseVideoComponent course={course} courseClasses={courseClasses} />
     </div>
   );
 };

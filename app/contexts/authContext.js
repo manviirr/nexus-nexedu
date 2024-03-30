@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from "react";
+import React, { useContext, createContext, useState, useEffect } from "react";
 import { useCallback } from "react";
 import firebaseApp from '../../firebase/config';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
@@ -11,6 +11,14 @@ export const AuthProvider = ({
     children
 }) => {
     const auth = getAuth(firebaseApp);
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+        auth.onAuthStateChanged(user => {
+            console.log("user", user);
+            setUser(user);
+        })
+    }, [auth]);
 
     const signIn = useCallback(async (email, password) => {
         try{
@@ -44,7 +52,8 @@ export const AuthProvider = ({
                 signIn,
                 auth,
                 logout,
-                signUp
+                signUp,
+                user
             }}
         >
             {children}

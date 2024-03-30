@@ -8,6 +8,7 @@ import ShadowDomWrapper from "@/app/components/ShadowDomWrapper/ShadowDomWrapper
 import { toast } from "react-toastify";
 import { createCheckoutSession } from "@/app/services/payment-service";
 import PurchaseCourse from "./PurchaseCourse";
+import Link from "next/link";
 
 export default async function CoursePage({
     params
@@ -53,10 +54,10 @@ export default async function CoursePage({
                         <h4 className="text-2xl font-semibold mb-3">Instructor</h4>
                         <div className="flex items-center">
                             <Image sizes="100vw" height={0} width={0} className="h-12 w-12 rounded-full object-cover mr-4" src="/assets/icons/instructor.webp" alt="Instructor" />
-                            <div>
+                            <Link href={`/courses/${course._id}/instructor`}>
                                 <p className="text-gray-900">{course.instructor.name}</p>
                                 <p className="text-gray-600">{course.instructor.designation}</p>
-                            </div>
+                            </Link>
                         </div>
                     </div>
 

@@ -48,7 +48,7 @@ function CoursesComponent() {
         return (
             <div className="flex justify-center items-center h-screen">
                 <div className="text-center">
-                    <p className="text-xl text-gray-800 mb-4">You haven't purchased any courses yet.</p>
+                    <p className="text-xl text-gray-800 mb-4">You haven&apos;t purchased any courses yet.</p>
                     <p className="text-md text-gray-700">Browse our courses and start learning today!</p>
                 </div>
             </div>
